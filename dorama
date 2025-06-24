@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mundo dos Doramas</title>
+    <style>
+        /* Reset e Estilos Gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #fff5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #e74c3c;
+        }
+        
+        /* Cabeçalho */
+        header {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .logo span {
+            color: #f9e79f;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 1rem 0;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        nav ul li {
+            margin: 0 1rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #f9e79f;
+        }
+        
+        /* Conteúdo Principal */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .hero {
+            background: url('https://via.placeholder.com/1200x400') no-repeat center center/cover;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            position: relative;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 1rem;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #e74c3c;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #c0392b;
+        }
+        
+        /* Seção de Doramas */
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #c0392b;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: #e74c3c;
+            margin: 0.5rem auto;
+        }
+        
+        .doramas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .dorama-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .dorama-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .dorama-img {
+            height: 350px;
+            overflow: hidden;
+        }
+        
+        .dorama-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .dorama-card:hover .dorama-img img {
+            transform: scale(1.1);
+        }
+        
+        .dorama-info {
+            padding: 1.5rem;
+        }
+        
+        .dorama-info h3 {
+            margin-bottom: 0.5rem;
+            color: #c0392b;
+        }
+        
+        .dorama-info p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .rating {
+            color: #f39c12;
+            font-weight: bold;
+        }
+        
+        /* Newsletter */
+        .newsletter {
+            background-color: #e74c3c;
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+        }
+        
+        .newsletter h2 {
+            margin-bottom: 1rem;
+        }
+        
+        .newsletter p {
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            font-size: 1rem;
+        }
+        
+        .newsletter-form button {
+            background-color: #c0392b;
+            color: white;
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .newsletter-form button:hover {
+            background-color: #a93226;
+        }
+        
+        /* Rodapé */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        
+        .social-links {
+            margin: 1rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            margin: 0 0.5rem;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #f9e79f;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            
+            .hero {
+                height: 300px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-form input {
+                border-radius: 5px;
+                margin-bottom: 0.5rem;
+            }
+            
+            .newsletter-form button {
+                border-radius: 5px;
+                padding: 0.8rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero {
+                height: 200px;
+            }
+            
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+            
+            .doramas-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Mundo <span>Dorama</span></div>
+        <nav>
+            <ul>
+                <li><a href="#">Início</a></li>
+                <li><a href="#">Doramas</a></li>
+                <li><a href="#">Top 10</a></li>
+                <li><a href="#">Notícias</a></li>
+                <li><a href="#">Sobre</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="container">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Descubra o fascinante mundo dos doramas</h1>
+                <p>Os melhores dramas coreanos em um só lugar</p>
+                <a href="#" class="btn">Explorar</a>
+            </div>
+        </section>
+        
+        <section>
+            <h2 class="section-title">Doramas em Destaque</h2>
+            <div class="doramas-grid">
+                <div class="dorama-card">
+                    <div class="dorama-img">
+                        <img src="https://via.placeholder.com/300x450" alt="Crash Landing on You">
+                    </div>
+                    <div class="dorama-info">
+                        <h3>Crash Landing on You</h3>
+                        <p>Uma herdeira coreana faz um pouso forçado na Coreia do Norte e se apaixona por um oficial do exército.</p>
+                        <div class="rating">⭐ 9.0/10</div>
+                    </div>
+                </div>
+                
+                <div class="dorama-card">
+                    <div class="dorama-img">
+                        <img src="https://via.placeholder.com/300x450" alt="Itaewon Class">
+                    </div>
+                    <div class="dorama-info">
+                        <h3>Itaewon Class</h3>
+                        <p>Um jovem abre um restaurante em Itaewon e busca vingança contra um conglomerado que destruiu sua vida.</p>
+                        <div class="rating">⭐ 8.8/10</div>
+                    </div>
+                </div>
+                
+                <div class="dorama-card">
+                    <div class="dorama-img">
+                        <img src="https://via.placeholder.com/300x450" alt="Goblin">
+                    </div>
+                    <div class="dorama-info">
+                        <h3>Goblin</h3>
+                        <p>Um imortal solitário busca sua noiva humana para encerrar sua vida eterna, mas o destino tem outros planos.</p>
+                        <div class="rating">⭐ 8.9/10</div>
+                    </div>
+                </div>
+                
+                <div class="dorama-card">
+                    <div class="dorama-img">
+                        <img src="https://via.placeholder.com/300x450" alt="Squid Game">
+                    </div>
+                    <div class="dorama-info">
+                        <h3>Squid Game</h3>
+                        <p>Competidores endividados jogam jogos infantis mortais por uma chance de ganhar um prêmio em dinheiro.</p>
+                        <div class="rating">⭐ 8.3/10</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="newsletter">
+            <h2>Assine nossa Newsletter</h2>
+            <p>Receba as últimas notícias sobre doramas, lançamentos e recomendações diretamente no seu e-mail.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Seu melhor e-mail" required>
+                <button type="submit">Assinar</button>
+            </form>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2023 Mundo Dorama. Todos os direitos reservados.</p>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook">f</i></a>
+            <a href="#"><i class="fab fa-twitter">t</i></a>
+            <a href="#"><i class="fab fa-instagram">i</i></a>
+            <a href="#"><i class="fab fa-youtube">y</i></a>
+        </div>
+        <p>Desenvolvido com ❤️ por fãs de doramas</p>
+    </footer>
+</body>
+</html>
